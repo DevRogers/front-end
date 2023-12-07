@@ -1,4 +1,4 @@
-const URL = "https://backend21a.onrender.com/pessoas/"
+const URL =  "https://back-yxgr.onrender.com/pessoas/"
 var listaPessoas = []
 
 function iniciarTabela(){
