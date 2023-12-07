@@ -1,8 +1,8 @@
-const URL = "https://back-yxgr.onrender.com/pessoas/"
-var listaVeiculos = []
+const URL = "https://backend21a.onrender.com/pessoas/"
+var listaPessoas = []
 
 function iniciarTabela(){
-    return `<div class="linhaVeiculos">
+    return `<div class="linhaPessoas">
                 <p class="item">Id</p>
                 <p class="item">Nome</p>
                 <p class="item">Idade</p>
@@ -11,22 +11,22 @@ function iniciarTabela(){
             </div>`;
 }
 
-function criarLinhaVeiculos(veiculo){
-    return `<div class="linhaVeiculos">
-                <p class="item">`+veiculo.id+`</p>
-                <p class="item">`+veiculo.modelo+`</p>
-                <p class="item">`+veiculo.ano+`</p>
+function criarLinhaPessoas(pessoa){
+    return `<div class="linhaPessoas">
+                <p class="item">`+pessoa.id+`</p>
+                <p class="item">`+pessoa.nome+`</p>
+                <p class="item">`+pessoa.idade+`</p>
                 <p class="item"><img class="icone lapis" src="../img/lapis.jpg" alt="icone lápis"></p>
                 <p class="item"><img class="icone lixeira" src="../img/lixeira.png" alt="icone lixeira"></p>
             </div>`;
 }
 
-function adicionarVeiculos(){
-    var tabelaVeiculos = document.getElementById("tabelaVeiculos")
-    tabelaVeiculos.innerHTML += iniciarTabela()
-    for (let i = 0; i < listaVeiculos.length; i++) {
-        const veiculo = listaVeiculos[i];
-        tabelaVeiculos.innerHTML += criarLinhaVeiculos(veiculo)
+function adicionarPessoas(){
+    var tabelaPessoas = document.getElementById("tabelaPessoas")
+    tabelaPessoas.innerHTML += iniciarTabela()
+    for (let i = 0; i < listaPessoas.length; i++) {
+        const pessoa = listaPessoas[i];
+        tabelaPessoas.innerHTML += criarLinhaPessoas(pessoa)
     }
     cadastrarEventosLapis()
     cadastrarEventosLixeira()
@@ -35,8 +35,8 @@ function adicionarVeiculos(){
 fetch(URL).then(function(response) {
     return response.json();
 }).then(function(data) {
-    listaVeiculos = data
-    adicionarVeiculos()
+    listaPessoas = data
+    adicionarPessoas()
 }).catch(function(error) {
     console.log(error);
 });
@@ -47,10 +47,10 @@ botaoAdicionar.addEventListener("click",function(){
 })
 
 function atualizarTela(id){
-    listaVeiculos = listaVeiculos.filter( p => p.id != id)
-    var tabelaPessoas = document.getElementById("tabelaVeiculos")
+    listaPessoas = listaPessoas.filter( p => p.id != id)
+    var tabelaPessoas = document.getElementById("tabelaPessoas")
     tabelaPessoas.innerHTML = ""
-    adicionarVeiculos()
+    adicionarPessoas()
 }
 
 function realizarExclusao(id){
@@ -64,7 +64,6 @@ function realizarExclusao(id){
         atualizarTela(id)
     }).catch(function(error){
         alert("Erro ao deletar pessoa")
-        console.log(error)
     })
 }
 
@@ -79,8 +78,8 @@ function cadastrarEventosLixeira(){
     }
 }
 
-function editarURL(url, id, modelo, ano){
-    return url+'?id='+id+'&modelo='+modelo+'&ano='+ano
+function editarURL(url, id, nome, idade){
+    return url+'?id='+id+'&nome='+nome+'&idade='+idade
 }
 
 function cadastrarEventosLapis(){
@@ -89,9 +88,9 @@ function cadastrarEventosLapis(){
         const l = lapis[i];
         l.addEventListener("click",function(event){
             var id = event.target.parentElement.parentElement.children[0].innerText
-            var modelo = event.target.parentElement.parentElement.children[1].innerText
-            var ano = event.target.parentElement.parentElement.children[2].innerText
-            window.location.href = editarURL("adicionar.html",id,modelo,ano);
+            var nome = event.target.parentElement.parentElement.children[1].innerText
+            var idade = event.target.parentElement.parentElement.children[2].innerText
+            window.location.href = editarURL("adicionar.html",id,nome,idade);
         })
     }
 }

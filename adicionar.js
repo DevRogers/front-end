@@ -1,4 +1,4 @@
-const URL = "https://back-yxgr.onrender.com/pessoas/"
+const URL = "https://backend21a.onrender.com/pessoas/"
 
 var idPessoa = null
 lerParametros()
@@ -6,32 +6,32 @@ lerParametros()
 function lerParametros(){
     const urlParams = new URLSearchParams(window.location.search);
     idPessoa = urlParams.get("id")
-    var modelo = urlParams.get("modelo")
-    var ano = urlParams.get("ano")
+    var nome = urlParams.get("nome")
+    var idade = urlParams.get("idade")
 
-    document.getElementById("campoModelo").value = modelo
-    document.getElementById("campoAno").value = ano
+    document.getElementById("campoNome").value = nome
+    document.getElementById("campoIdade").value = idade
 }
 
 var botaoAdicionar = document.getElementById("botaoAdicionar")
 botaoAdicionar.addEventListener("click", function(){
-    var modeloVeiculo = document.getElementById("campoModelo").value
-    var anoVeiculo = parseInt( document.getElementById("campoAno").value )
+    var nomePessoa = document.getElementById("campoNome").value
+    var idadePessoa = parseInt( document.getElementById("campoIdade").value )
 
     if( idPessoa != null ){
-        enviaPUT(idPessoa, modeloVeiculo, anoVeiculo)
+        enviaPUT(idPessoa, nomePessoa, idadePessoa)
     }else{
-        enviaPOST( modeloVeiculo, anoVeiculo )
+        enviaPOST( nomePessoa, idadePessoa )
     }
 })
 
-function enviaPUT( id, modeloVeiculo, anoVeiculo ){
+function enviaPUT( id, nomePessoa, idadePessoa ){
     var header = {
         method:"PUT",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-            modelo:modeloVeiculo,
-            ano:anoVeiculo
+            nome:nomePessoa,
+            idade:idadePessoa
         })
     }
     fetch(URL+id,header)
@@ -45,13 +45,13 @@ function enviaPUT( id, modeloVeiculo, anoVeiculo ){
     })
 }
 
-function enviaPOST( modeloVeiculo, anoVeiculo ){
+function enviaPOST( nomePessoa, idadePessoa ){
     var header = {
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-            modelo:modeloVeiculo,
-            ano:anoVeiculo
+            nome:nomePessoa,
+            idade:idadePessoa
         })
     }
     fetch(URL,header)

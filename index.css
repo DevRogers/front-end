@@ -7,11 +7,11 @@
     font-size: xx-large;
 }
 
-#tabelaVeiculos{
+#tabelaPessoas{
     width: 100%;
 }
 
-.linhaVeiculos{
+.linhaPessoas{
     width: 100%;
     display: flex;
     flex-direction: row;
