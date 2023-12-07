@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/veiculos/"
+const URL = "https://back-yxgr.onrender.com/pessoas/"
 
 var idPessoa = null
 lerParametros()
